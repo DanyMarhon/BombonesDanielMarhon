@@ -77,6 +77,14 @@ namespace Bombones.Servicios.Servicios
             }
         }
 
+        public Cliente? GetClientePorId(int clienteId)
+        {
+            using (var conn = new SqlConnection(_cadena))
+            {
+                return _repositorio?.GetClientePorId(clienteId, conn);
+            }
+        }
+
         public void Guardar(Cliente cliente)
         {
             if (_repositorio is null)
@@ -95,10 +103,10 @@ namespace Bombones.Servicios.Servicios
                         {
                             _repositorio?.Agregar(cliente, conn, tran);
                         }
-                        //else
-                        //{
-                        //    _repositorio?.Editar(cliente, conn, tran);
-                        //}
+                        else
+                        {
+                            _repositorio?.Editar(cliente, conn, tran);
+                        }
 
                         tran.Commit();//guarda efectivamente
                     }

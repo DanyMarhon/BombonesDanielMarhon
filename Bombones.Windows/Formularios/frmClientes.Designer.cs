@@ -74,23 +74,23 @@
             panelGrilla.Dock = DockStyle.Fill;
             panelGrilla.Location = new Point(0, 62);
             panelGrilla.Name = "panelGrilla";
-            panelGrilla.Size = new Size(931, 568);
+            panelGrilla.Size = new Size(931, 483);
             panelGrilla.TabIndex = 9;
             // 
             // dgvDatos
             // 
             dgvDatos.AllowUserToAddRows = false;
             dgvDatos.AllowUserToDeleteRows = false;
+            dgvDatos.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dgvDatos.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvDatos.Columns.AddRange(new DataGridViewColumn[] { colDni, colCliente, colDireccion, colTelefono });
-            dgvDatos.Dock = DockStyle.Fill;
             dgvDatos.Location = new Point(0, 0);
             dgvDatos.MultiSelect = false;
             dgvDatos.Name = "dgvDatos";
             dgvDatos.ReadOnly = true;
             dgvDatos.RowHeadersVisible = false;
             dgvDatos.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvDatos.Size = new Size(931, 568);
+            dgvDatos.Size = new Size(931, 483);
             dgvDatos.TabIndex = 1;
             // 
             // colDni
@@ -159,6 +159,7 @@
             tsbEditar.Size = new Size(44, 59);
             tsbEditar.Text = "Editar";
             tsbEditar.TextImageRelation = TextImageRelation.ImageAboveText;
+            tsbEditar.Click += tsbEditar_Click;
             // 
             // tsbDetalle
             // 
@@ -204,6 +205,7 @@
             tsbActualizar.Size = new Size(63, 59);
             tsbActualizar.Text = "Actualizar";
             tsbActualizar.TextImageRelation = TextImageRelation.ImageAboveText;
+            tsbActualizar.Click += tsbActualizar_Click;
             // 
             // toolStripSeparator2
             // 
@@ -285,9 +287,9 @@
             panelNavegacion.Controls.Add(btnAnterior);
             panelNavegacion.Controls.Add(btnPrimero);
             panelNavegacion.Dock = DockStyle.Bottom;
-            panelNavegacion.Location = new Point(0, 530);
+            panelNavegacion.Location = new Point(0, 545);
             panelNavegacion.Name = "panelNavegacion";
-            panelNavegacion.Size = new Size(931, 100);
+            panelNavegacion.Size = new Size(931, 85);
             panelNavegacion.TabIndex = 10;
             // 
             // txtCantidadRegistros
@@ -366,9 +368,9 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(931, 630);
-            Controls.Add(panelNavegacion);
             Controls.Add(panelGrilla);
             Controls.Add(toolStrip1);
+            Controls.Add(panelNavegacion);
             Name = "frmClientes";
             Text = "frmClientes";
             Load += frmClientes_Load;

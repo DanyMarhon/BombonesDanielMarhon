@@ -15,5 +15,6 @@ namespace Bombones.Servicios.Intefaces
         bool Existe(Cliente cliente);
         List<ClienteListDto> GetLista();
         void Guardar(Cliente cliente);
+        Cliente? GetClientePorId(int clienteId);
     }
 }

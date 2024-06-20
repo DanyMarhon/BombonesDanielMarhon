@@ -74,6 +74,28 @@ namespace Bombones.Datos.Repositorios
             }
         }
 
+        public void Editar(Cliente cliente, SqlConnection conn, SqlTransaction tran)
+        {
+            var updateQuery = @"UPDATE Clientes
+            SET Documento=@Documento,
+                Apellido=@Apellido,
+                Nombres=@Nombres
+            WHERE ClienteId=@ClienteId";
+            int registrosAfectados = conn.Execute(updateQuery, cliente, tran);
+            if (registrosAfectados == 0)
+            {
+                throw new Exception("No se pudo editar el cliente");
+            }
+        }
+
+        public Cliente? GetClientePorId(int clienteId, SqlConnection conn)
+        {
+            string selectQuery = @"SELECT ClienteId, Documento, Nombres, Apellido 
+                FROM Clientes 
+                WHERE ClienteId=@ClienteId";
+            return conn.QuerySingleOrDefault<Cliente>(
+                selectQuery, new { @ClienteId = clienteId });
+        }
         public List<ClienteListDto> GetLista(SqlConnection conn)
         {
             string selectQuery = @"SELECT ClienteId, Documento, Nombres, Apellido FROM Clientes";

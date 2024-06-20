@@ -13,7 +13,14 @@ namespace Bombones.Windows.Formularios
 {
     public partial class frmClientesAE : Form
     {
+        private readonly IServiceProvider? _servicios;
         private Cliente? cliente;
+
+        public frmClientesAE(IServiceProvider? servicios)
+        {
+            InitializeComponent();
+            _servicios = servicios;
+        }
 
         public frmClientesAE()
         {
@@ -23,9 +30,12 @@ namespace Bombones.Windows.Formularios
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
-
-
-
+            if (cliente is not null)
+            {
+                txtDocumento.Text = cliente.Documento.ToString();
+                txtApellido.Text = cliente.Apellido;
+                txtNombre.Text = cliente.Nombres;
+            }
         }
 
         private void btnOk_Click(object sender, EventArgs e)

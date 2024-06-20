@@ -4,11 +4,13 @@ using Bombones.Entidades.Extensions;
 using Bombones.Servicios.Intefaces;
 using Bombones.Windows.Helpers;
 using Microsoft.Extensions.DependencyInjection;
+using System;
 
 namespace Bombones.Windows.Formularios
 {
     public partial class frmClientes : Form
     {
+        private readonly IServiceProvider? _serviceProvider;
         private readonly IServiciosClientes? _servicios;
         private List<ClienteListDto>? lista;
         public frmClientes(IServiceProvider? serviceProvider)
@@ -41,15 +43,15 @@ namespace Bombones.Windows.Formularios
                 if (!_servicios.Existe(cliente))
                 {
                     _servicios.Guardar(cliente);
-                var r = GridHelper.ConstruirFila(dgvDatos);
-                ClienteListDto clienteDto = ClientesExtensions
-                        .ToClienteListDto(cliente);
-                GridHelper.SetearFila(r, clienteDto);
-                GridHelper.AgregarFila(r, dgvDatos);
-                MessageBox.Show("Registro agregado",
-                                "Mensaje",
-                                MessageBoxButtons.OK,
-                                MessageBoxIcon.Information);
+                    DataGridViewRow r = GridHelper.ConstruirFila(dgvDatos);
+                    ClienteListDto clienteDto = ClientesExtensions.ToClienteListDto(cliente);
+                    GridHelper.SetearFila(r, clienteDto);
+                    GridHelper.AgregarFila(r, dgvDatos);
+                    clienteDto = ClientesExtensions.ToClienteListDto(cliente);
+                    MessageBox.Show("Registro agregado",
+                                    "Mensaje",
+                                    MessageBoxButtons.OK,
+                                    MessageBoxIcon.Information);
                 }
                 else
                 {
@@ -146,6 +148,69 @@ namespace Bombones.Windows.Formularios
                             MessageBoxButtons.OK,
                             MessageBoxIcon.Error);
 
+            }
+        }
+
+        private void tsbEditar_Click(object sender, EventArgs e)
+        {
+            if (dgvDatos.SelectedRows.Count == 0)
+            {
+                return;
+            }
+            var r = dgvDatos.SelectedRows[0];
+            if (r.Tag == null) return;
+            ClienteListDto clienteDto = (ClienteListDto)r.Tag;
+            Cliente? cliente = _servicios?.GetClientePorId(clienteDto.ClienteId);
+            if (cliente is null) return;
+            frmClientesAE frm = new frmClientesAE(_serviceProvider) { Text = "Editar Cliente" };
+            frm.SetCliente(cliente);
+            DialogResult dr = frm.ShowDialog(this);
+            if (dr == DialogResult.Cancel) return;
+            cliente = frm.GetCliente();
+
+            if (cliente == null) return;
+            try
+            {
+                if (!_servicios?.Existe(cliente) ?? false)
+                {
+                    _servicios?.Guardar(cliente);
+
+                    clienteDto = ClientesExtensions.ToClienteListDto(cliente);
+
+                    GridHelper.SetearFila(r, clienteDto);
+                    MessageBox.Show("Registro editado",
+                                    "Mensaje",
+                                    MessageBoxButtons.OK,
+                                    MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show("Registro existente\nEdición denegada",
+                    "Error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message,
+                "Error",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Error);
+            }
+        }
+
+        private void tsbActualizar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                lista = _servicios?.GetLista();
+                MostrarDatosEnGrilla();
+            }
+            catch (Exception)
+            {
+
+                throw;
             }
         }
     }
