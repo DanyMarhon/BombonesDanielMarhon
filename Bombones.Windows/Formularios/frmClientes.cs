@@ -38,9 +38,9 @@ namespace Bombones.Windows.Formularios
                 {
                     throw new ApplicationException("Dependencia no cargada");
                 }
-                //if (!_servicios.Existe(tipoDeChocolate))
-                //{
-                _servicios.Guardar(cliente);
+                if (!_servicios.Existe(cliente))
+                {
+                    _servicios.Guardar(cliente);
                 var r = GridHelper.ConstruirFila(dgvDatos);
                 ClienteListDto clienteDto = ClientesExtensions
                         .ToClienteListDto(cliente);
@@ -50,14 +50,14 @@ namespace Bombones.Windows.Formularios
                                 "Mensaje",
                                 MessageBoxButtons.OK,
                                 MessageBoxIcon.Information);
-                //}
-                //else
-                //{
-                //    MessageBox.Show("Registro existente\nAlta denegada",
-                //    "Error",
-                //    MessageBoxButtons.OK,
-                //    MessageBoxIcon.Error);
-                //}
+                }
+                else
+                {
+                    MessageBox.Show("Registro existente\nAlta denegada",
+                    "Error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+                }
             }
             catch (Exception)
             {

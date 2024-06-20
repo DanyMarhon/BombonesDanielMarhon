@@ -47,6 +47,33 @@ namespace Bombones.Datos.Repositorios
             }
         }
 
+        public bool Existe(Cliente cliente, SqlConnection conn, SqlTransaction? tran = null)
+        {
+            try
+            {
+                string selectQuery = @"SELECT COUNT(*) FROM Clientes ";
+                string finalQuery = string.Empty;
+                string conditional = string.Empty;
+                if (cliente.ClienteId == 0)
+                {
+                    conditional = "WHERE Documento = @Documento";
+                }
+                else
+                {
+                    conditional = @"WHERE Documento = @Documento
+                            AND ClienteId<>@ClienteId";
+                }
+                finalQuery = string.Concat(selectQuery, conditional);
+                return conn.QuerySingle<int>(finalQuery, cliente) > 0;
+
+            }
+            catch (Exception)
+            {
+
+                throw new Exception("No se pudo comprobar si existe el cliente");
+            }
+        }
+
         public List<ClienteListDto> GetLista(SqlConnection conn)
         {
             string selectQuery = @"SELECT ClienteId, Documento, Nombres, Apellido FROM Clientes";

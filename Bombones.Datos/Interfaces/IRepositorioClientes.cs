@@ -14,6 +14,8 @@ namespace Bombones.Datos.Interfaces
         void Borrar(int clienteId, SqlConnection conn, SqlTransaction? tran = null);
 
         void Agregar(Cliente cliente, SqlConnection conn, SqlTransaction? tran = null);
+
+        bool Existe(Cliente cliente, SqlConnection conn, SqlTransaction? tran = null);
         List<ClienteListDto>? GetLista(SqlConnection conn);
     }
 }

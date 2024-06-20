@@ -51,7 +51,16 @@ namespace Bombones.Servicios.Servicios
 
         public bool Existe(Cliente cliente)
         {
-            throw new NotImplementedException();
+            if (_repositorio is null)
+            {
+                throw new ApplicationException("Dependencias no cargadas!!!");
+            }
+
+            using (var conn = new SqlConnection(_cadena))
+            {
+                conn.Open();
+                return _repositorio.Existe(cliente, conn);
+            }
         }
 
         public List<ClienteListDto> GetLista()

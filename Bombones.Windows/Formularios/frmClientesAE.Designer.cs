@@ -41,29 +41,29 @@
             tabPage1 = new TabPage();
             tabPage2 = new TabPage();
             dataGridView1 = new DataGridView();
-            tabPage3 = new TabPage();
             colCalle = new DataGridViewTextBoxColumn();
             colPais = new DataGridViewTextBoxColumn();
             colEstado = new DataGridViewTextBoxColumn();
             colCiudad = new DataGridViewTextBoxColumn();
             colDetalle = new DataGridViewButtonColumn();
-            btnAgregarDireccion = new Button();
-            btnBorrarDireccion = new Button();
             btnEditarDireccion = new Button();
+            btnBorrarDireccion = new Button();
+            btnAgregarDireccion = new Button();
+            tabPage3 = new TabPage();
             splitContainer1 = new SplitContainer();
+            button1 = new Button();
+            button2 = new Button();
+            button3 = new Button();
+            cboTipoTelefono = new ComboBox();
+            label2 = new Label();
+            label1 = new Label();
+            textBox1 = new TextBox();
             dataGridView2 = new DataGridView();
             dataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
             dataGridViewTextBoxColumn2 = new DataGridViewTextBoxColumn();
             dataGridViewTextBoxColumn3 = new DataGridViewTextBoxColumn();
             dataGridViewTextBoxColumn4 = new DataGridViewTextBoxColumn();
             dataGridViewButtonColumn1 = new DataGridViewButtonColumn();
-            label1 = new Label();
-            textBox1 = new TextBox();
-            cboTipoTelefono = new ComboBox();
-            label2 = new Label();
-            button1 = new Button();
-            button2 = new Button();
-            button3 = new Button();
             tabCliente.SuspendLayout();
             tabPage1.SuspendLayout();
             tabPage2.SuspendLayout();
@@ -104,6 +104,7 @@
             btnCancelar.Text = "Cancelar";
             btnCancelar.TextImageRelation = TextImageRelation.ImageAboveText;
             btnCancelar.UseVisualStyleBackColor = true;
+            btnCancelar.Click += btnCancelar_Click;
             // 
             // btnOk
             // 
@@ -115,6 +116,7 @@
             btnOk.Text = "Ok";
             btnOk.TextImageRelation = TextImageRelation.ImageAboveText;
             btnOk.UseVisualStyleBackColor = true;
+            btnOk.Click += btnOk_Click;
             // 
             // txtApellido
             // 
@@ -202,17 +204,6 @@
             dataGridView1.Size = new Size(920, 278);
             dataGridView1.TabIndex = 0;
             // 
-            // tabPage3
-            // 
-            tabPage3.Controls.Add(splitContainer1);
-            tabPage3.Location = new Point(4, 24);
-            tabPage3.Name = "tabPage3";
-            tabPage3.Padding = new Padding(3);
-            tabPage3.Size = new Size(926, 387);
-            tabPage3.TabIndex = 2;
-            tabPage3.Text = "Teléfonos";
-            tabPage3.UseVisualStyleBackColor = true;
-            // 
             // colCalle
             // 
             colCalle.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
@@ -247,16 +238,16 @@
             colDetalle.Name = "colDetalle";
             colDetalle.ReadOnly = true;
             // 
-            // btnAgregarDireccion
+            // btnEditarDireccion
             // 
-            btnAgregarDireccion.Image = Properties.Resources.add_28px;
-            btnAgregarDireccion.Location = new Point(19, 301);
-            btnAgregarDireccion.Name = "btnAgregarDireccion";
-            btnAgregarDireccion.Size = new Size(119, 54);
-            btnAgregarDireccion.TabIndex = 35;
-            btnAgregarDireccion.Text = "Ok";
-            btnAgregarDireccion.TextImageRelation = TextImageRelation.ImageAboveText;
-            btnAgregarDireccion.UseVisualStyleBackColor = true;
+            btnEditarDireccion.Image = Properties.Resources.edit_28px1;
+            btnEditarDireccion.Location = new Point(269, 301);
+            btnEditarDireccion.Name = "btnEditarDireccion";
+            btnEditarDireccion.Size = new Size(119, 54);
+            btnEditarDireccion.TabIndex = 35;
+            btnEditarDireccion.Text = "Ok";
+            btnEditarDireccion.TextImageRelation = TextImageRelation.ImageAboveText;
+            btnEditarDireccion.UseVisualStyleBackColor = true;
             // 
             // btnBorrarDireccion
             // 
@@ -269,16 +260,27 @@
             btnBorrarDireccion.TextImageRelation = TextImageRelation.ImageAboveText;
             btnBorrarDireccion.UseVisualStyleBackColor = true;
             // 
-            // btnEditarDireccion
+            // btnAgregarDireccion
             // 
-            btnEditarDireccion.Image = Properties.Resources.edit_28px1;
-            btnEditarDireccion.Location = new Point(269, 301);
-            btnEditarDireccion.Name = "btnEditarDireccion";
-            btnEditarDireccion.Size = new Size(119, 54);
-            btnEditarDireccion.TabIndex = 35;
-            btnEditarDireccion.Text = "Ok";
-            btnEditarDireccion.TextImageRelation = TextImageRelation.ImageAboveText;
-            btnEditarDireccion.UseVisualStyleBackColor = true;
+            btnAgregarDireccion.Image = Properties.Resources.add_28px;
+            btnAgregarDireccion.Location = new Point(19, 301);
+            btnAgregarDireccion.Name = "btnAgregarDireccion";
+            btnAgregarDireccion.Size = new Size(119, 54);
+            btnAgregarDireccion.TabIndex = 35;
+            btnAgregarDireccion.Text = "Ok";
+            btnAgregarDireccion.TextImageRelation = TextImageRelation.ImageAboveText;
+            btnAgregarDireccion.UseVisualStyleBackColor = true;
+            // 
+            // tabPage3
+            // 
+            tabPage3.Controls.Add(splitContainer1);
+            tabPage3.Location = new Point(4, 24);
+            tabPage3.Name = "tabPage3";
+            tabPage3.Padding = new Padding(3);
+            tabPage3.Size = new Size(926, 387);
+            tabPage3.TabIndex = 2;
+            tabPage3.Text = "Teléfonos";
+            tabPage3.UseVisualStyleBackColor = true;
             // 
             // splitContainer1
             // 
@@ -303,6 +305,74 @@
             splitContainer1.Size = new Size(920, 381);
             splitContainer1.SplitterDistance = 103;
             splitContainer1.TabIndex = 0;
+            // 
+            // button1
+            // 
+            button1.Image = Properties.Resources.edit_28px1;
+            button1.Location = new Point(750, 12);
+            button1.Name = "button1";
+            button1.Size = new Size(119, 54);
+            button1.TabIndex = 51;
+            button1.Text = "Ok";
+            button1.TextImageRelation = TextImageRelation.ImageAboveText;
+            button1.UseVisualStyleBackColor = true;
+            // 
+            // button2
+            // 
+            button2.Image = Properties.Resources.delete_sign_28px;
+            button2.Location = new Point(625, 12);
+            button2.Name = "button2";
+            button2.Size = new Size(119, 54);
+            button2.TabIndex = 52;
+            button2.Text = "Ok";
+            button2.TextImageRelation = TextImageRelation.ImageAboveText;
+            button2.UseVisualStyleBackColor = true;
+            // 
+            // button3
+            // 
+            button3.Image = Properties.Resources.add_28px;
+            button3.Location = new Point(500, 12);
+            button3.Name = "button3";
+            button3.Size = new Size(119, 54);
+            button3.TabIndex = 53;
+            button3.Text = "Ok";
+            button3.TextImageRelation = TextImageRelation.ImageAboveText;
+            button3.UseVisualStyleBackColor = true;
+            // 
+            // cboTipoTelefono
+            // 
+            cboTipoTelefono.DropDownStyle = ComboBoxStyle.DropDownList;
+            cboTipoTelefono.FormattingEnabled = true;
+            cboTipoTelefono.Location = new Point(141, 11);
+            cboTipoTelefono.Name = "cboTipoTelefono";
+            cboTipoTelefono.Size = new Size(311, 23);
+            cboTipoTelefono.TabIndex = 49;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new Point(40, 14);
+            label2.Name = "label2";
+            label2.Size = new Size(81, 15);
+            label2.TabIndex = 50;
+            label2.Text = "Tipo Teléfono:";
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(40, 46);
+            label1.Name = "label1";
+            label1.Size = new Size(55, 15);
+            label1.TabIndex = 43;
+            label1.Text = "Teléfono:";
+            // 
+            // textBox1
+            // 
+            textBox1.Location = new Point(141, 43);
+            textBox1.MaxLength = 8;
+            textBox1.Name = "textBox1";
+            textBox1.Size = new Size(311, 23);
+            textBox1.TabIndex = 42;
             // 
             // dataGridView2
             // 
@@ -349,74 +419,6 @@
             dataGridViewButtonColumn1.HeaderText = "Detalle";
             dataGridViewButtonColumn1.Name = "dataGridViewButtonColumn1";
             dataGridViewButtonColumn1.ReadOnly = true;
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Location = new Point(40, 46);
-            label1.Name = "label1";
-            label1.Size = new Size(55, 15);
-            label1.TabIndex = 43;
-            label1.Text = "Teléfono:";
-            // 
-            // textBox1
-            // 
-            textBox1.Location = new Point(141, 43);
-            textBox1.MaxLength = 8;
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(311, 23);
-            textBox1.TabIndex = 42;
-            // 
-            // cboTipoTelefono
-            // 
-            cboTipoTelefono.DropDownStyle = ComboBoxStyle.DropDownList;
-            cboTipoTelefono.FormattingEnabled = true;
-            cboTipoTelefono.Location = new Point(141, 11);
-            cboTipoTelefono.Name = "cboTipoTelefono";
-            cboTipoTelefono.Size = new Size(311, 23);
-            cboTipoTelefono.TabIndex = 49;
-            // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Location = new Point(40, 14);
-            label2.Name = "label2";
-            label2.Size = new Size(81, 15);
-            label2.TabIndex = 50;
-            label2.Text = "Tipo Teléfono:";
-            // 
-            // button1
-            // 
-            button1.Image = Properties.Resources.edit_28px1;
-            button1.Location = new Point(750, 12);
-            button1.Name = "button1";
-            button1.Size = new Size(119, 54);
-            button1.TabIndex = 51;
-            button1.Text = "Ok";
-            button1.TextImageRelation = TextImageRelation.ImageAboveText;
-            button1.UseVisualStyleBackColor = true;
-            // 
-            // button2
-            // 
-            button2.Image = Properties.Resources.delete_sign_28px;
-            button2.Location = new Point(625, 12);
-            button2.Name = "button2";
-            button2.Size = new Size(119, 54);
-            button2.TabIndex = 52;
-            button2.Text = "Ok";
-            button2.TextImageRelation = TextImageRelation.ImageAboveText;
-            button2.UseVisualStyleBackColor = true;
-            // 
-            // button3
-            // 
-            button3.Image = Properties.Resources.add_28px;
-            button3.Location = new Point(500, 12);
-            button3.Name = "button3";
-            button3.Size = new Size(119, 54);
-            button3.TabIndex = 53;
-            button3.Text = "Ok";
-            button3.TextImageRelation = TextImageRelation.ImageAboveText;
-            button3.UseVisualStyleBackColor = true;
             // 
             // frmClientesAE
             // 
